@@ -1,12 +1,11 @@
+import { combineReducers } from 'redux'
 
-const defaultState = {
-    a : 1,
-    b : 2
-}
+import aboutReducer from '@page/about/reducer';
+import homeReducer from '@page/home/reducer';
+import loginReducer from '@page/login/reducer';
 
-
-
-export default (state = defaultState, action)=>{
-
-    return  action.value;
-}
+export default combineReducers({
+    aboutReducer,
+    homeReducer,
+    loginReducer,
+  })
