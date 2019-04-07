@@ -3,6 +3,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from './actions';
 
+
+@connect(
+    state => state,
+    dispatch => ({actions: bindActionCreators(actions,dispatch)})
+)
 class Login extends Component {
 
     constructor(props){
@@ -17,14 +22,14 @@ class Login extends Component {
 
             loginAction({login: 4});
         
-        // router.push({
-        //     pathname: 'home',
-        //     query: {
-        //         title:1,
-        //         time:2,
-        //         text:3
-        //     },
-        // });
+        router.push({
+            pathname: 'home',
+            query: {
+                title:1,
+                time:2,
+                text:3
+            },
+        });
     }
 
     render(){
@@ -41,9 +46,6 @@ class Login extends Component {
     }
 }
 
-export default connect(
-    state => state,
-    dispatch => ({actions: bindActionCreators(actions,dispatch)})
-  )(Login)
+export default Login;
 
     

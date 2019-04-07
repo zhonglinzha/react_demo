@@ -3,6 +3,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from './actions';
 
+
+@connect(
+    state => state,
+    dispatch => ({actions: bindActionCreators(actions,dispatch)})
+)
 class Home extends Component {
 
     constructor(props){
@@ -18,7 +23,4 @@ class Home extends Component {
         );
     }
 }
-export default connect(
-    state => state,
-    dispatch => ({actions: bindActionCreators(actions,dispatch)})
-  )(Home)
+export default Home;
