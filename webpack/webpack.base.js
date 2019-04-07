@@ -22,6 +22,8 @@ module.exports = {
         alias: {
             '@base': path.resolve('./src/base'),
             '@dll': path.resolve('./src/dll'),
+            '@page': path.resolve('./src/page'),
+            '@store': path.resolve('./src/store'),
         },
     },
 

@@ -8,8 +8,9 @@ module.exports = webpackMerge(base,{
     devServer:{
         contentBase:'./dist',
         port: 3000,
+        inline: true,
         compress: true,
-        hot: true,
+        hot: false,
         open: false,
         proxy: {
             '/api':'http://localhost:3000',
@@ -19,6 +20,8 @@ module.exports = webpackMerge(base,{
         new webpack.DefinePlugin({
             DEV: JSON.stringify('development')
         }),
+        // new webpack.NamedModulesPlugin(),//打印更新的模块路径
+        // new webpack.HotModuleReplacementPlugin(),//热更新插件
     ]
 
 })
