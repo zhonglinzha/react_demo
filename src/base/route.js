@@ -30,7 +30,7 @@ export default [
         path: "about",
         getComponent(location, cb) {
           import(/* webpackChunkName: 'about' */ "@page/about").then(about =>
-            cb(null, about)
+            cb(null, about.default)
           ).catch(e=>console.log(e));
         }
       }
