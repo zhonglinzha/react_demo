@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from './actions';
-import './style';
+import style from './style.scss';
 
 
 @connect(
@@ -39,7 +39,7 @@ class Login extends Component {
 
         return (
             <div>
-                <h1>{login}</h1>
+                <h1 className={style.title}>{login}</h1>
                 <div onClick={this.toHome}>跳转</div>
 
             </div>
