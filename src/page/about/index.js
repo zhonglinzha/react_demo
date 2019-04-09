@@ -10,6 +10,11 @@ import * as actions from './actions';
 )
 class About extends Component {
 
+    constructor(props){
+        super(props);
+        console.log(this);
+    };
+
     render(){
         return (
             <div>
