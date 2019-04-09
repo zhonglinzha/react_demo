@@ -5,7 +5,7 @@ import { Router, hashHistory } from 'react-router'
 import { Provider } from 'react-redux'
 import router from './route';
 import store from '@store';
-import './index.css';
+import './index.scss';
 
 const renderApp = () => {
     ReactDOM.render(

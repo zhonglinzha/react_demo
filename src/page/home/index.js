@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from './actions';
 import { Button } from "antd";
-
+import style from './style.scss';
 
 @connect(
     state => state,

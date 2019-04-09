@@ -4,8 +4,7 @@ const webpack = require('webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');//模版配置
 const HappyPack = require('happypack');//多线程打包，加快打包速度
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');//抽离css文件
-const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
-
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 module.exports = {
 
     optimization: {
@@ -32,6 +31,7 @@ module.exports = {
         filename: 'js/[name].[hash:8].js',
         path: path.resolve('./dist'),
         publicPath: '',
+        chunkFilename: 'js/[name].[chunkhash:8].chunk.js',
     },
 
     resolve: {
@@ -54,11 +54,14 @@ module.exports = {
                 use: 'happypack/loader?id=js',
             },
             {
-                test: /\.(css)$/,
+                test: /\.(css|scss)$/,
                 use: [
                     MiniCssExtractPlugin.loader,
                     // {loader: 'style-loader'},
-                    {loader: 'css-loader'},
+                    {loader: 'css-loader', options: {
+                        modules: true,
+                        localIdentName: '[local]_[hash:base64:8]',
+                    }},
                     {loader: 'postcss-loader'},
                     {loader: 'sass-loader'},
                 ]
@@ -80,8 +83,11 @@ module.exports = {
     },
 
     plugins: [
+        // new BundleAnalyzerPlugin(),
         new MiniCssExtractPlugin({
             filename: 'css/[name].[hash:8].css',
+            chunkFilename: 'css/[name].[chunkhash:8].chunk.css',
+
         }),
         new HtmlWebPackPlugin({
             template: path.resolve('./src/base/index.html'),
@@ -92,12 +98,6 @@ module.exports = {
                 collapseWhitespace: false,
             },
         }),
-        new AddAssetHtmlPlugin({
-            hash: true,
-            filepath: path.resolve('./src/dll/*.js'),
-            outputPath: path.resolve('/js'),
-            publicPath: 'js/',
-        }),
         new webpack.BannerPlugin('版权说明'),
         new webpack.DllReferencePlugin({
             manifest: path.resolve('./src/dll','manifest.json'),
@@ -105,6 +105,6 @@ module.exports = {
         new HappyPack({
             id: 'js',
             use:  ['babel-loader'],
-        })
+        }),
     ]
 }

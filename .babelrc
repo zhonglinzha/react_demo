@@ -15,3 +15,5 @@
           }]
     ]
 }
+
+//babel-plugin-transform-dynamic-import-default
