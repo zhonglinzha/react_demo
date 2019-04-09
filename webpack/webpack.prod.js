@@ -9,8 +9,12 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");//
 
 module.exports = webpackMerge(base,{
     mode: 'production',
-
-    optimization: { 
+    performance: {
+        hints: 'warning',
+        maxAssetSize: 2500000, //单文件超过250k，命令行告警
+        maxEntrypointSize: 2500000, //首次加载文件总和超过250k，命令行告警
+    },
+    optimization: {
         minimizer: [
             new UglifyJsPlugin({
               cache: true,
@@ -18,13 +22,22 @@ module.exports = webpackMerge(base,{
               sourceMap: false,
             }),
             new OptimizeCSSAssetsPlugin()
-          ]
+        ],
+        //minimize: true, //取代 new UglifyJsPlugin(/* ... */)
+        // providedExports: true,
+        // usedExports: true,
+        //识别package.json中的sideEffects以剔除无用的模块，用来做tree-shake
+        //依赖于optimization.providedExports和optimization.usedExports
+        // sideEffects: true,
+        //取代 new webpack.optimize.ModuleConcatenationPlugin()
+        // concatenateModules: true,
+        //取代 new webpack.NoEmitOnErrorsPlugin()，编译错误时不打印输出资源。
+        // noEmitOnErrors: true
     },
-
     plugins: [
-        new webpack.DefinePlugin({
-            DEV: JSON.stringify('production')
-        }),
+        new webpack.DefinePlugin({ "process.env.NODE_ENV": JSON.stringify("production") }),
         new CleanWebpackPlugin({}),
     ]
 })
+
+// console.log(JSON.stringify(module.exports))

@@ -8,6 +8,24 @@ const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 
 module.exports = {
 
+    optimization: {
+        // namedModules: true, //取代插件中的 new webpack.NamedModulesPlugin()
+        // namedChunks: true,
+        runtimeChunk: {
+          "name": "manifest"
+        },
+        splitChunks: {
+          cacheGroups: {
+            default: false,
+            // vendors: false,
+            vendors: {
+              test: /[\\/]node_modules[\\/]/,
+              name: 'vendors',
+              chunks: 'all'
+            }
+          }
+        },
+    },
     entry: path.resolve('./src/base/index.js'),
 
     output: {
