@@ -1,3 +1,4 @@
+/* eslint-disable */
 const path = require('path');
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
@@ -14,7 +15,7 @@ module.exports = webpackMerge(base,{
         compress: true,
         hot: false,
         open: false,
-        quiet: true,
+        quiet: false,
         proxy: {
             '/api':'http://localhost:3001',
         }
@@ -31,17 +32,18 @@ module.exports = webpackMerge(base,{
         }),
         // new webpack.NamedModulesPlugin(),//打印更新的模块路径
         // new webpack.HotModuleReplacementPlugin(),//热更新插件
-        new FriendlyErrorsWebpackPlugin({
-            compilationSuccessInfo: {
-              messages: ['You application is running here http://localhost:3000'],
-              notes: ['Some additionnal notes to be displayed unpon successful compilation']
-            },
-            onErrors: function (severity, errors) {
-            },
-            clearConsole: true,
-            additionalFormatters: [],
-            additionalTransformers: []
-          })
+        // new FriendlyErrorsWebpackPlugin({
+        //     compilationSuccessInfo: {
+        //       messages: ['You application is running here http://localhost:3000'],
+        //       notes: ['Some additionnal notes to be displayed unpon successful compilation']
+        //     },
+        //     onErrors: function (severity, errors) {
+        //         console.log('------->',errors);
+        //     },
+        //     clearConsole: true,
+        //     additionalFormatters: [],
+        //     additionalTransformers: []
+        //   })
     ]
 
 })

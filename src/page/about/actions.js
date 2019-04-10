@@ -6,9 +6,9 @@ const about = data => ({
 	data,
 });
 
-const aboutAction = param => (dispatch, getState) => {
-	
-	return new Promise();
-};
+const aboutAction = param => (dispatch, getState) => new Promise(() => {
+	getState();
+	dispatch(about(param));
+});
 
 export { aboutAction };

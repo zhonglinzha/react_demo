@@ -6,9 +6,9 @@ const home = data => ({
 	data,
 });
 
-const homeAction = param => (dispatch, getState) => {
-	
-	return new Promise();
-};
+const homeAction = param => (dispatch, getState) => new Promise(() => {
+	getState();
+	dispatch(home(param));
+});
 
 export { homeAction };
