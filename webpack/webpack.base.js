@@ -1,3 +1,4 @@
+/* eslint-disable */
 const path = require('path');
 const webpack = require('webpack');
 
@@ -5,6 +6,8 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');//模版配置
 const HappyPack = require('happypack');//多线程打包，加快打包速度
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');//抽离css文件
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const StyleLintPlugin = require('stylelint-webpack-plugin');//样式格式化
+
 module.exports = {
 
     optimization: {
@@ -47,6 +50,13 @@ module.exports = {
 
     module: {
         rules: [
+            {
+                test: /\.(js|jsx)$/,
+                loader: 'eslint-loader',
+                include: path.resolve('./src'),
+                exclude: /node_modules/,
+                enforce: 'pre',
+            },
             {   
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
@@ -87,7 +97,12 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: 'css/[name].[hash:8].css',
             chunkFilename: 'css/[name].[chunkhash:8].chunk.css',
-
+        }),
+        new StyleLintPlugin({
+            files: '**/*.scss',
+            failOnError: false,
+            syntax: 'scss',
+            fix: true,
         }),
         new HtmlWebPackPlugin({
             template: path.resolve('./src/base/index.html'),

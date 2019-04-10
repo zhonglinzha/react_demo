@@ -6,11 +6,9 @@ const login = data => ({
 	data,
 });
 
-const loginAction = param => (dispatch, getState) => {
-	
-	return new Promise(()=>{
-		dispatch(login(param));
-	});
-};
+const loginAction = param => (dispatch, getState) => new Promise(() => {
+	getState();
+	dispatch(login(param));
+});
 
 export { loginAction };

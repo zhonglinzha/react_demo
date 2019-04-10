@@ -1,12 +1,15 @@
 $color: green;
-@function setColor($arg){
-    @return $arg;
+@function setColor($arg) {
+	@return $arg;
 }
 
 .title {
-    font-size: 30px;
-    color: red;
+	font-size: 30px;
+	color: red;
 }
 
-
-
+.he {
+	position: relative;
+	width: 100px;
+	background: gray;
+}
