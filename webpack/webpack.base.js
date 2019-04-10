@@ -20,7 +20,7 @@ module.exports = {
           cacheGroups: {
             default: false,
             // vendors: false,
-            vendors: {
+            vendor: {
               test: /[\\/]node_modules[\\/]/,
               name: 'vendors',
               chunks: 'all'
@@ -94,15 +94,15 @@ module.exports = {
 
     plugins: [
         // new BundleAnalyzerPlugin(),
-        new MiniCssExtractPlugin({
-            filename: 'css/[name].[hash:8].css',
-            chunkFilename: 'css/[name].[chunkhash:8].chunk.css',
-        }),
         new StyleLintPlugin({
             files: '**/*.scss',
             failOnError: false,
             syntax: 'scss',
             fix: true,
+        }),
+        new MiniCssExtractPlugin({
+            filename: 'css/[name].[hash:8].css',
+            chunkFilename: 'css/[name].[chunkhash:8].chunk.css',
         }),
         new HtmlWebPackPlugin({
             template: path.resolve('./src/base/index.html'),

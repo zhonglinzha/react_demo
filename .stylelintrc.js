@@ -313,6 +313,7 @@ module.exports = {
         // "selector-pseudo-element-colon-notation": null,
         "unit-no-unknown": null,
         "no-descending-specificity": null,
-        "value-list-max-empty-lines": null
+		"value-list-max-empty-lines": null,
+		"max-empty-lines": 1,
     }
 }
