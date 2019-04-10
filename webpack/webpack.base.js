@@ -65,6 +65,7 @@ module.exports = {
             },
             {
                 test: /\.(css|scss)$/,
+                include: /src/,
                 use: [
                     MiniCssExtractPlugin.loader,
                     // {loader: 'style-loader'},
@@ -75,6 +76,17 @@ module.exports = {
                     {loader: 'postcss-loader'},
                     {loader: 'sass-loader'},
                 ]
+            },
+            {
+                test: /\.(css|scss)$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    // {loader: 'style-loader'},
+                    {loader: 'css-loader'},
+                    {loader: 'postcss-loader'},
+                    {loader: 'sass-loader'},
+                ],
+                exclude: /src/,
             },
             {
                 test: /\.(jpg|jpeg|png|gif)$/,

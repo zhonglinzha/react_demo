@@ -6,7 +6,7 @@
   "scripts": {
     "eslint": "eslint --init",
     "dll": "webpack --progress --config ./webpack/webpack.dll.js",
-    "dev": "webpack-dev-server --progress --config ./webpack/webpack.dev.js --fix",
+    "dev": "webpack-dev-server --progress --config ./webpack/webpack.dev.js",
     "prod": "webpack --progress --config ./webpack/webpack.prod.js"
   },
   "keywords": [],
