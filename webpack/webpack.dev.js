@@ -7,6 +7,7 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 module.exports = webpackMerge(base,{
     mode: 'development',
+    devtool: 'eval-source-map',
     devServer:{
         contentBase:'./src/dll',
         port: 3000,
@@ -15,12 +16,13 @@ module.exports = webpackMerge(base,{
         hot: false,
         open: false,
         quiet: false,
+        clientLogLevel: "warning",
         proxy: {
             '/api':'http://localhost:3001',
         }
     },
     plugins: [
-        new webpack.DefinePlugin({ "process.env.NODE_ENV": JSON.stringify("development") }),
+        new webpack.DefinePlugin({ "process.env.NODE_ENV": JSON.stringify("devel") }),
         new AddAssetHtmlPlugin({
             hash: true,
             filepath: path.resolve('./src/dll/*.js'),
