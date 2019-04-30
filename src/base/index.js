@@ -19,3 +19,20 @@ const renderApp = () => {
 	);
 };
 renderApp();
+// window.addEventListener('popstate', e => {
+// 	console.log('2------->', e);
+// });
+
+// window.addEventListener('hashchange', e => {
+// 	console.log('1------->', e);
+// });
+
+/* eslint-disable */
+document.addEventListener('DOMContentLoaded', function (e) {
+	// console.log(this, e);
+}, false);
+
+
+window.addEventListener('load', function(e){
+	console.log(this,e);
+})

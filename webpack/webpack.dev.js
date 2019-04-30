@@ -18,7 +18,10 @@ module.exports = webpackMerge(base,{
         quiet: false,
         clientLogLevel: "warning",
         proxy: {
-            '/api':'http://localhost:3001',
+            '/api': {
+                target: 'https://www.dell-lee.com',
+                changeOrigin: true,
+            },
         }
     },
     plugins: [

@@ -8,6 +8,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');//抽离css文�
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const StyleLintPlugin = require('stylelint-webpack-plugin');//样式格式化
 
+const TestPlugin = require('../src/plugins/test-plugin');
+const TestPlugin2 = require('../src/plugins/test2-plugin');
+
 module.exports = {
 
     optimization: {
@@ -48,6 +51,10 @@ module.exports = {
         },
     },
 
+    resolveLoader: {
+        modules: [path.resolve('./src/loaders') ,'node_modules'],
+    },
+
     module: {
         rules: [
             {
@@ -75,6 +82,8 @@ module.exports = {
                     }},
                     {loader: 'postcss-loader'},
                     {loader: 'sass-loader'},
+                    {loader: 'test-loader'},
+
                 ]
             },
             {
@@ -133,5 +142,7 @@ module.exports = {
             id: 'js',
             use:  ['babel-loader'],
         }),
+        new TestPlugin(),
+        new TestPlugin2()
     ]
 }
