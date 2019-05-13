@@ -34,5 +34,5 @@ document.addEventListener('DOMContentLoaded', function (e) {
 
 
 window.addEventListener('load', function(e){
-	console.log(this,e);
+	// console.log(this,e);
 })

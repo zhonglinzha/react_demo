@@ -9,6 +9,8 @@ const UglifyJsPlugin = require("uglifyjs-webpack-plugin");//这个是因为 css 
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");//压缩css 和 抽离css 一起使用
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 
+// const CompressionWebpackPlugin = require('compression-webpack-plugin');
+
 module.exports = webpackMerge(base,{
     mode: 'production',
     performance: {
@@ -45,6 +47,7 @@ module.exports = webpackMerge(base,{
             publicPath: 'js/',
         }),
         new CleanWebpackPlugin({}),
+        // new CompressionWebpackPlugin(),
     ]
 })
 

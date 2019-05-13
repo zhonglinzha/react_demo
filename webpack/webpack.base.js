@@ -23,11 +23,11 @@ module.exports = {
           cacheGroups: {
             default: false,
             // vendors: false,
-            vendor: {
+            vendors: {
               test: /[\\/]node_modules[\\/]/,
               name: 'vendors',
               chunks: 'all'
-            }
+            },
           }
         },
     },
@@ -82,7 +82,10 @@ module.exports = {
                     }},
                     {loader: 'postcss-loader'},
                     {loader: 'sass-loader'},
-                    {loader: 'test-loader'},
+                    {loader: 'test-loader', options: {
+                        a:1,
+                        b:2
+                    }},
 
                 ]
             },
