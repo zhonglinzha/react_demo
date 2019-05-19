@@ -10,6 +10,13 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');//样式格式化
 
 module.exports = {
 
+    // stats : { 
+    //     assets: true,
+    //     colors : true,
+    //     errors: true, 
+    //     errorDetails: true, 
+    //     hash : true ,
+    // },
     optimization: {
         // namedModules: true, //取代插件中的 new webpack.NamedModulesPlugin()
         // namedChunks: true,
@@ -50,6 +57,12 @@ module.exports = {
 
     module: {
         rules: [
+            {
+                test: /\.worker\.js$/,
+                use: { loader: 'worker-loader' },
+                exclude: /node_modules/,
+                include: path.resolve('./src'),
+            },
             {
                 test: /\.(js|jsx)$/,
                 loader: 'eslint-loader',

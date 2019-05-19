@@ -19,10 +19,11 @@ module.exports = webpackMerge(base,{
         clientLogLevel: "warning",
         proxy: {
             '/api':'http://localhost:3001',
-        }
+        },
     },
+    //profile: true, //是否捕捉 Webpack构建的性能信息,用于分析是什么原因导致构
     plugins: [
-        new webpack.DefinePlugin({ "process.env.NODE_ENV": JSON.stringify("devel") }),
+        new webpack.DefinePlugin({ "process.env.NODE_ENV": JSON.stringify("development") }),
         new AddAssetHtmlPlugin({
             hash: true,
             filepath: path.resolve('./src/dll/*.js'),
