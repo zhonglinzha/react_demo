@@ -9,8 +9,9 @@ module.exports = webpackMerge(base,{
     mode: 'development',
     devtool: 'eval-source-map',
     devServer:{
+        disableHostCheck: true,
         contentBase:'./src/dll',
-        port: 3000,
+        port: 3002,
         inline: true,
         compress: true,
         hot: false,
@@ -18,14 +19,14 @@ module.exports = webpackMerge(base,{
         quiet: false,
         clientLogLevel: "warning",
         proxy: {
-            '/api': {
-                target: 'https://www.dell-lee.com',
+            '/query': {
+                target: 'https://www.easy-mock.com/mock/5ce4b1b5d619c750d6b41ae5/examplezzl',
                 changeOrigin: true,
             },
         }
     },
     plugins: [
-        new webpack.DefinePlugin({ "process.env.NODE_ENV": JSON.stringify("devel") }),
+        new webpack.DefinePlugin({ "process.env.NODE_ENV": JSON.stringify("development") }),
         new AddAssetHtmlPlugin({
             hash: true,
             filepath: path.resolve('./src/dll/*.js'),

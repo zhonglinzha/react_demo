@@ -1,5 +1,5 @@
 import React from 'react';
 
-const App = ({ children }) => <div id="app">{children}</div>;
+const App = ({ children }) => <React.Fragment>{children}</React.Fragment>;
 
 export default App;

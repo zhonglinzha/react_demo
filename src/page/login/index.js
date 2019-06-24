@@ -1,24 +1,28 @@
-import React, { Component, Suspense } from 'react';
+/* eslint-disable */
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Button } from 'antd';
 import axios from 'axios';
 // import camelcase from 'camelcase';
+// import VList from '../../source/List';
+// import AutoSizer from '../../source/AutoSizer';
+import { List as VList } from 'react-virtualized/dist/es/List';
+import { AutoSizer } from 'react-virtualized/dist/es/AutoSizer';
 import * as actions from './actions';
 import style from './style.scss';
+import Example from './hooks';
+// import Test from './test';
 
-// import Example from './hooks';
-import Test from './test';
+// const Example = React.lazy(() => new Promise(resolve => {
+// 	setTimeout(() => {
+// 		resolve(import('./hooks'));
+// 	}, 5000);
+// }));
 
-const Example = React.lazy(() => new Promise(resolve => {
-	setTimeout(() => {
-		resolve(import('./hooks'));
-	}, 5000);
-}));
-
-const ctx = require.context('./', true, /mock\.js$/);
-ctx.keys().forEach(i => ctx(i));
+// const ctx = require.context('./', true, /mock\.js$/);
+// ctx.keys().forEach(i => ctx(i));
 
 
 @connect(
@@ -28,11 +32,10 @@ ctx.keys().forEach(i => ctx(i));
 class Login extends Component {
 	constructor(props) {
 		super(props);
-		this.myRef = React.createRef();
-
-		const {Provider, Consumer } = React.createContext(null);
-		console.log(Provider);
-		console.log(Consumer);
+		this.state = {
+			a: 1,
+			list: [],
+		};
 	}
 
 	componentWillMount() {
@@ -40,45 +43,64 @@ class Login extends Component {
 	}
 
 	componentDidMount() {
-		console.log(this.myRef.current);
-		// console.log = e => { alert(e) };// eslint-disable-line
-		console.log('2', this.node);
-		const thisDOM = ReactDOM.findDOMNode(this.node);// eslint-disable-line
-		console.log('---->', thisDOM);
-		// console.log(thisDOM);
-		thisDOM.addEventListener('click', e => {
-			console.log('11-------', e);
-		});
-		console.log('------>', document.getElementById('button'));
+		// console.log(this.node.getBoundingClientRect());
 	}
 
-	componentWillReceiveProps() {
+	getNode = e =>{
+		console.log(e.getBoundingClientRect());
 	}
 
-	shouldComponentUpdate() {
-		// console.log('3', this.node);
-		console.log('---------??');
-		return true;
+	// componentWillReceiveProps() {
+	// }
+
+	// shouldComponentUpdate() {
+	// 	// console.log(nextProps, nextState);
+	// 	return true;
+	// }
+
+	// componentWillUpdate() {
+	// 	// console.log('4', this.node);
+	// }
+
+	// componentDidUpdate() {
+	// 	// console.log('5', this.node);
+	// }
+
+	// componentWillUnmount() {
+	// 	// console.log('6', this.node);
+	// }
+
+	getObjectURL = file => { 
+		var url = null; 
+		if (window.createObjcectURL != undefined) { 
+			url = window.createOjcectURL(file); 
+		} else if (window.URL != undefined) { 
+			url = window.URL.createObjectURL(file); 
+		} else if (window.webkitURL != undefined) { 
+			url = window.webkitURL.createObjectURL(file); 
+		} 
+		return url; 
 	}
 
-	componentWillUpdate() {
-		// console.log('4', this.node);
+	getFile = e => {
+		var file = e.currentTarget.files[0];
+		var reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onprogress = e => {
+			console.log(e);
+		}
+		reader.onload = e => { 
+			console.log(e);
+		}
 	}
 
-	componentDidUpdate() {
-		// console.log('5', this.node);
-	}
-
-	componentWillUnmount() {
-		// console.log('6', this.node);
-	}
-
-	go = () => {
-		console.log('22-----', this);
-		// const { loginAction } = this.props.actions;// eslint-disable-line
-		// loginAction({login: '4'});
-		// this.forceUpdate();
-		// e.stopImmediatePropagation();
+	go = e => {
+		console.log(this.state)
+	// 	console.log(e.type);
+	// 	// const { loginAction } = this.props.actions;// eslint-disable-line
+	// 	// loginAction({login: '4'});
+	// 	// this.forceUpdate();
+	// 	// e.stopImmediatePropagation();
 		// const { router } = this.props;
 		// router.push({
 		// 	pathname: 'home',
@@ -87,33 +109,71 @@ class Login extends Component {
 		// 		b: 2,
 		// 	},
 		// });
-		axios.post('/amountInformation', {
-			firstName: 'Fred',
-			lastName: 'Flintstone',
-		})
-			.then(response => {
-				console.log(response);
-			}).catch(error => {
-				console.log(error);
-			});
+		// axios.post('/query', {
+		// 	firstName: 'Fred',
+		// 	lastName: 'Flintstone',
+		// })
+		// 	.then(response => {
+		// 		console.log(response);
+		// 	}).catch(error => {
+		// 		console.log(error);
+		// 	});
 		// this.setState({
 		// });
 	}
 
+	// getValue = e => {
+	// 	this.setState({
+	// 		a: e.target.value,
+	// 	});
+	// }
+
+	renderItem = ({ index, key, style: _style }) => {
+
+		return	(<div className={style['flex-layout']} key={key} style={_style}>
+			{/* <div>{this.state.list[index].a}</div>
+			<div>{this.state.list[index].b}</div>
+			<div>{this.state.list[index].c}</div> */}
+		</div>);
+
+	}
+
 	render() {
-		// const { login } = this.props
+		// const { a, list } = this.state;
+		// console.log(list);
 		return (
-			<div className={style.he}>
-				<div>
-					<Test ref={this.myRef} />
-					<Suspense fallback={<div>Loading...</div>}>
-						<Example />
-					</Suspense>
-					<Button type="primary" id='button' onClick={e => this.go(e)} ref={node => this.node = node}>Primary</Button>
-					<Button>1</Button>
-					<Button type="dashed">Dashed</Button>
-				</div>
-			</div>
+			// <div className={style.he}>
+			// 	<div>
+			// 		<input value={a} onChange={e => this.getValue(e)} />
+			// 		<Test ref={this.myRef} test={a} />
+			// 		<Suspense fallback={<div>Loading...</div>}>
+			// 			<Example />
+			// 		</Suspense>
+			// 		<Button>1</Button>
+			// 		<Button type="dashed">{a}</Button>
+			// 	</div>
+			// </div>
+		<React.Fragment>
+					<div className={style.v}>123</div>
+					<Example   test={this.state.a} />
+					<Button type="primary" id='button' onClick={e => this.go(e)}>Primary</Button>
+					<input type='file' onChange={e=> this.getFile(e)} ref={this.getNode}/>
+				<AutoSizer disableHeight>
+					{({ width }) => {
+						// console.log(width);
+						return (
+							<VList
+								width={width}
+								height={1000}
+								overscanRowCount={10}
+								rowCount={10000}
+								rowHeight={50}
+								rowRenderer={this.renderItem}
+							/>
+						);
+					}}
+				</AutoSizer>
+		 </React.Fragment>
 		);
 	}
 }

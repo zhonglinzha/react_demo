@@ -1,4 +1,6 @@
 /* eslint-disable */
+require('babel-core/register')();
+
 const path = require('path');
 const webpack = require('webpack');
 
@@ -10,6 +12,11 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');//样式格式化
 
 const TestPlugin = require('../src/plugins/test-plugin');
 const TestPlugin2 = require('../src/plugins/test2-plugin');
+
+
+// const { SkeletonPlugin } = require('page-skeleton-webpack-plugin'); //骨架屏
+
+console.log(__dirname);
 
 module.exports = {
 
@@ -57,13 +64,13 @@ module.exports = {
 
     module: {
         rules: [
-            {
-                test: /\.(js|jsx)$/,
-                loader: 'eslint-loader',
-                include: path.resolve('./src'),
-                exclude: /node_modules/,
-                enforce: 'pre',
-            },
+            // {
+            //     test: /\.(js|jsx)$/,
+            //     loader: 'eslint-loader',
+            //     include: path.resolve('./src'),
+            //     exclude: /node_modules/,
+            //     enforce: 'pre',
+            // },
             {   
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
@@ -129,6 +136,7 @@ module.exports = {
             chunkFilename: 'css/[name].[chunkhash:8].chunk.css',
         }),
         new HtmlWebPackPlugin({
+            // loading: require('../loading'),
             template: path.resolve('./src/base/index.html'),
             filename: 'index.html',
             hash: true,
@@ -146,6 +154,7 @@ module.exports = {
             use:  ['babel-loader'],
         }),
         new TestPlugin(),
-        new TestPlugin2()
+        new TestPlugin2(),
+      
     ]
 }

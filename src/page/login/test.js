@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
 
-class Test extends Component {
+class Test extends PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -17,14 +17,14 @@ class Test extends Component {
 		console.log('3-----Test');
 	}
 
-	componentWillReceiveProps() {
-		console.log('4-----Test');
+	componentWillReceiveProps(a) {
+		console.log('4-----Test', a);
 	}
 
-	shouldComponentUpdate() {
-		console.log('5-----Test');
-		return true;
-	}
+	// shouldComponentUpdate(nextProps, nextState) {
+	// 	console.log(nextProps, nextState);
+	// 	return true;
+	// }
 
 	componentWillUpdate() {
 		console.log('6-----Test');
@@ -40,8 +40,9 @@ class Test extends Component {
 
 	render() {
 		console.log('9-----Test');
+		const { test } = this.props;
 		return (
-			<div>Test</div>
+			<div>{test}</div>
 		);
 	}
 }

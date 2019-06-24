@@ -12,7 +12,7 @@ import style from './style.scss';
 class Home extends Component {
 	constructor(props) {
 		super(props);
-		console.log(this);
+		// console.log(this);
 	}
 
 	render() {

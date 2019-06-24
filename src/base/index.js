@@ -1,14 +1,16 @@
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, hashHistory } from 'react-router';
+import { Router, browserHistory as history } from 'react-router';
 import { Provider } from 'react-redux';
 import { syncHistoryWithStore } from 'react-router-redux';
 import router from './route';
 import store from '@store';
 import './index.scss';
 
-const superHistory = syncHistoryWithStore(hashHistory, store);
+const superHistory = syncHistoryWithStore(history, store);
+
+history.listen(e => console.log('???????------>', e));
 
 const renderApp = () => {
 	ReactDOM.render(
@@ -36,3 +38,4 @@ document.addEventListener('DOMContentLoaded', function (e) {
 window.addEventListener('load', function(e){
 	// console.log(this,e);
 })
+
