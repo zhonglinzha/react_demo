@@ -52,6 +52,7 @@ module.exports = {
             '@dll': path.resolve('./src/dll'),
             '@page': path.resolve('./src/page'),
             '@store': path.resolve('./src/store'),
+            '@img': path.resolve('./src/img'),
         },
     },
 
@@ -63,13 +64,13 @@ module.exports = {
                 exclude: /node_modules/,
                 include: path.resolve('./src'),
             },
-            {
-                test: /\.(js|jsx)$/,
-                loader: 'eslint-loader',
-                include: path.resolve('./src'),
-                exclude: /node_modules/,
-                enforce: 'pre',
-            },
+            // {
+            //     test: /\.(js|jsx)$/,
+            //     loader: 'eslint-loader',
+            //     include: path.resolve('./src'),
+            //     exclude: /node_modules/,
+            //     enforce: 'pre',
+            // },
             {   
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,

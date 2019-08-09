@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Button } from 'antd';
@@ -13,8 +14,21 @@ import { array, func } from 'prop-types';
 import tworker from './t.worker';
 
 import LazyLoad from 'react-lazy-load';
+import { LazyImage } from "react-lazy-images";
 
-// const req = require('./mock');
+import TestHoc from './testHoc';
+
+
+const img = require('@img/img.jpg');
+
+import LifeCycle from './lifeCycle';
+
+
+// import NProgress from 'nprogress';
+// import 'nprogress/nprogress.css';
+
+
+const req = require('./mock');
 
 
 const files = require.context('../home',false,/style\.scss/);
@@ -33,7 +47,7 @@ files.keys().forEach(i=>{
 class Login extends Component {
 	constructor(props) {
 		super(props);
-		console.log(Test.n);
+		// console.log(Test.n);
 		let arr = [];
 		for(let i=0; i < 100 ; i++){
 			arr.push(i);
@@ -43,7 +57,7 @@ class Login extends Component {
 			arr,
 		}
 
-		console.log(React.isValidElement(<Test />));
+		// console.log(React.isValidElement(<Test />));
 	}
 	go1 = () => {
 		// var myWorker = new tworker();
@@ -55,22 +69,29 @@ class Login extends Component {
 
 	go = () => {
 
+		this.setState({
+			t : 2
+		});
+		console.log(this.state.t);
+		return;
 		// this.sleep(10000);
-		console.log('1111111')
-		// const { router } = this.props;
-		// router.push({
-		// 	pathname: 'home',
-		// 	query: {
-		// 		a: 1,
-		// 		b: 2,
-		// 	},
-		// });
+		// console.log('1111111')
+		const { router } = this.props;
+		router.push({
+			pathname: 'home',
+			query: {
+				a: 1,
+				b: 2,
+			},
+		});
+		// NProgress.start();
 		// axios.post('/amountInformation', {
 		// 	firstName: 'Fred',
 		// 	lastName: 'Flintstone',
 		// })
 		// 	.then(response => {
 		// 		console.log(response);
+		// 		// NProgress.done();
 		// 	}).catch(error => {
 		// 		console.log(error);
 		// 	});
@@ -123,9 +144,14 @@ class Login extends Component {
 		}
 	}
 
-
+	componentWillMount(){
+        console.log('1')
+    }
 
 	componentDidMount(){
+		console.log('2')	
+		// console.log(ReactDOM.findDOMNode(this.node));
+		// NProgress.start();
 
 		// document.addEventListener('scroll',this.jl(function(e){
 		// 	console.log(e);
@@ -143,28 +169,48 @@ class Login extends Component {
 		return (
 			<div className={style.he}>
 				<div>
-					<Button type="primary" onClick={this.go} id='t' >Primary</Button>
+				<LifeCycle  a='t1' />
+				<TestHoc test={123}/>
+				<LifeCycle  a='t2' />
+					<Button type="primary" onClick={this.go} id='t' ref={node => this.node = node}>Primary</Button>
 					<Button onClick={this.go1} >Defau</Button>
-					
 					{
 						
-						this.state.arr.map(i=><Button type="dashed" key={i} >Dashed</Button>)
+						this.state.arr.map(i=>(
+							<div>
+							{/* <img  height={200} width={200} src="http://apod.nasa.gov/apod/image/1502/HDR_MVMQ20Feb2015ouellet1024.jpg"/> */}
+							<LazyImage
+								src="http://apod.nasa.gov/apod/image/1502/HDR_MVMQ20Feb2015ouellet1024.jpg"
+								alt=""
+								placeholder={({ imageProps, ref }) => {
+									return <img ref={ref} src={img} alt='' height={200} width={200}/>;
+								}}
+								actual={({ imageProps }) => <img {...imageProps} height={200} width={200}/>}
+							/>
+							</div>
+						))
 					}
-					<LazyLoad height={762} offsetVertical={300}>
-						<img src='http://apod.nasa.gov/apod/image/1502/HDR_MVMQ20Feb2015ouellet1024.jpg' />
-					</LazyLoad>
-					<div className="filler" />
-					<LazyLoad height={683} offsetTop={200}>
-						<img src='http://apod.nasa.gov/apod/image/1502/2015_02_20_conj_bourque1024.jpg' />
-					</LazyLoad>
-					<div className="filler" />
-					<LazyLoad height={480} offsetHorizontal={50}>
-						<img src='http://apod.nasa.gov/apod/image/1502/MarsPlume_jaeschke_480.gif' />
-					</LazyLoad>
-					<div className="filler" />
-					<LazyLoad height={720} onContentVisible={() => console.log('look ma I have been lazyloaded!')}>
-						<img src='http://apod.nasa.gov/apod/image/1502/ToadSky_Lane_1080_annotated.jpg' />
-					</LazyLoad>
+					{/* <LazyLoad height={200} width={200}>
+						<img height={200} width={200} src='http://apod.nasa.gov/apod/image/1502/HDR_MVMQ20Feb2015ouellet1024.jpg' />
+					</LazyLoad> */}
+					<LazyImage
+						src="http://apod.nasa.gov/apod/image/1502/HDR_MVMQ20Feb2015ouellet1024.jpg"
+						alt=""
+						placeholder={({ imageProps, ref }) => {
+							return <img ref={ref} src={img} alt='' height={200} width={200}/>;
+						}}
+						actual={({ imageProps }) => <img {...imageProps} height={200} width={200}/>}
+					/>
+					<LazyImage
+						src="http://apod.nasa.gov/apod/image/1502/HDR_MVMQ20Feb2015ouellet1024.jpg"
+						alt=""
+						placeholder={({ imageProps, ref }) => {
+							return <img ref={ref} src={img} alt='' height={200} width={200}/>;
+						}}
+						actual={({ imageProps }) => <img {...imageProps} height={200} width={200}/>}
+					/>
+					
+					
 				</div>
 			</div>
 		);

@@ -15,8 +15,16 @@ class Home extends Component {
 		console.log(this);
 	}
 
+	go = () => {
+		const { router } = this.props;
+
+		router.push({
+			pathname: 'about',
+		})
+	}
+
 	render() {
-		return (<div><Button>123</Button></div>);
+		return (<div><Button onClick={this.go}>123</Button></div>);
 	}
 }
 export default Home;

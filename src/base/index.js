@@ -8,7 +8,15 @@ import router from './route';
 import store from '@store';
 import './index.scss';
 
+import './mock';
+
+hashHistory.listen(e => {
+	console.log('....', e);
+
+});
+
 const superHistory = syncHistoryWithStore(hashHistory, store);
+
 
 const renderApp = () => {
 	ReactDOM.render(

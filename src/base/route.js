@@ -10,12 +10,12 @@ export default [
 			},
 		},
 		childRoutes: [
-			{
-				path: 'login',
-				getComponent(location, cb) {
-          import(/* webpackChunkName: 'home' */ '@page/login').then(login => cb(null, login.default)).catch(e => console.log(e));
-				},
-			},
+		// 	{
+		// 		path: 'login',
+		// 		getComponent(location, cb) {
+        //   import(/* webpackChunkName: 'home' */ '@page/login').then(login => cb(null, login.default)).catch(e => console.log(e));
+		// 		},
+		// 	},
 			{
 				path: 'home',
 				getComponent(location, cb) {
